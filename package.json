@@ -1,0 +1,30 @@
+{
+  "name": "sail-backend",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "bcrypt": "^1.0.3",
+    "body-parser": "~1.18.2",
+    "connect-mongo": "^2.0.1",
+    "cookie-parser": "~1.4.3",
+    "cors": "^2.8.4",
+    "debug": "~2.6.9",
+    "express": "~4.15.5",
+    "express-session": "^1.15.6",
+    "jade": "~1.11.0",
+    "mongoose": "^5.0.7",
+    "morgan": "~1.9.0",
+    "serve-favicon": "~2.4.5"
+  },
+  "devDependencies": {
+    "eslint": "^4.18.1",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-standard": "^3.0.1"
+  }
+}
