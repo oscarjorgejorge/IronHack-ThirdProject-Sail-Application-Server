@@ -8,7 +8,7 @@ const MongoStore = require('connect-mongo')(session);
 const cors = require('cors');
 
 const index = require('./routes/index');
-// const auth = require('./routes/auth');
+const auth = require('./routes/auth');
 
 const app = express();
 
@@ -19,7 +19,10 @@ mongoose.connect('mongodb://localhost/sail-users', {
   reconnectTries: Number.MAX_VALUE
 });
 
-app.use(cors());
+app.use(cors({
+  credentials: true,
+  origin: ['http://localhost:4200']
+}));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -45,7 +48,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/', index);
-// app.use('/auth', auth);
+app.use('/auth', auth);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
