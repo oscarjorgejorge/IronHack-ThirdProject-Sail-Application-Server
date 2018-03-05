@@ -2,9 +2,10 @@
 
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const ObjectId = Schema.Types.ObjectId;
 
 const userSchema = new Schema({
-  owner: { type: Schema.Types.ObjectId, ref: 'User' },
+  _creator: { type: ObjectId, ref: 'User' },
   tripTitle: String,
   description: String,
   image: String,

@@ -9,6 +9,8 @@ router.post('/create', (req, res, next) => {
   const description = req.body.description;
   const image = req.body.image;
 
+  // console.log(req);
+
   if (!tripTitle || !description) {
     return res.status(422).json({error: 'validation'});
   }
@@ -20,10 +22,12 @@ router.post('/create', (req, res, next) => {
       }
 
       const newTrip = new Trip({
+        _creator: req.body.user._id,
         tripTitle,
         description,
         image
       });
+
       return newTrip.save();
       // .then(() => {
       //   req.session.currentUser = newUser;
