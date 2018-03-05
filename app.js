@@ -1,3 +1,6 @@
+'use strict';
+
+require('dotenv').config();
 const express = require('express');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
@@ -15,14 +18,14 @@ const app = express();
 
 // database connection
 mongoose.Promise = Promise;
-mongoose.connect('mongodb://localhost/sail-users', {
+mongoose.connect(process.env.MONGODB_URI, {
   keepAlive: true,
   reconnectTries: Number.MAX_VALUE
 });
 
 app.use(cors({
   credentials: true,
-  origin: ['http://localhost:4200']
+  origin: [process.env.CLIENT_URL]
 }));
 app.use(logger('dev'));
 app.use(bodyParser.json());
