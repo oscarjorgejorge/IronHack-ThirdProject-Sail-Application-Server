@@ -27,11 +27,10 @@ router.post('/create', (req, res, next) => {
         image
       });
 
-      return newTrip.save();
-      // .then(() => {
-      //   req.session.currentUser = newUser;
-      //   res.json(newTrip);
-      // });
+      newTrip.save()
+        .then((trip) => {
+          res.json(trip);
+        });
     })
     .catch(next);
 });
