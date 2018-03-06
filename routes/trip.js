@@ -39,9 +39,14 @@ router.get('/mytrips', (req, res, next) => {
   if (!req.session.currentUser) {
     return res.status(401).json({error: 'unauthorized'});
   }
-  console.log(req.session.currentUser);
 
   Trip.find({_creator: req.session.currentUser._id})
+    .then((results) => res.json(results))
+    .catch(next);
+});
+
+router.get('/trips', (req, res, next) => {
+  Trip.find({})
     .then((results) => res.json(results))
     .catch(next);
 });
