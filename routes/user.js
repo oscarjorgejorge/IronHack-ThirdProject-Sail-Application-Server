@@ -4,6 +4,7 @@ const express = require('express');
 const router = express.Router();
 
 const User = require('../models/user');
+const Trip = require('../models/trip');
 
 // --- POST Profile
 router.post('/edit', (req, res, next) => {
@@ -35,6 +36,12 @@ router.post('/edit', (req, res, next) => {
 
 router.post('/delete', (req, res, next) => {
   const id = req.session.currentUser._id;
+
+  Trip.remove({ _creator: id }, function (err) {
+    if (err) {
+      return next(err);
+    }
+  });
 
   User.findByIdAndRemove(id, (err, product) => {
     if (err) {

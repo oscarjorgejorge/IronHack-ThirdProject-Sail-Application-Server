@@ -67,9 +67,4 @@ router.post('/desactivate', (req, res, next) => {
     .catch(next);
 });
 
-// Product.findByIdAndUpdate(productId, updates, (err, product) => {
-//   if (err) { return next(err); }
-//   return res.redirect('/products');
-// });
-
 module.exports = router;
