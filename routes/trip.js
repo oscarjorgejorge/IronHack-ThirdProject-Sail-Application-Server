@@ -9,8 +9,6 @@ router.post('/create', (req, res, next) => {
   const description = req.body.description;
   const image = req.body.image;
 
-  // console.log(req);
-
   if (!tripTitle || !description) {
     return res.status(422).json({error: 'validation'});
   }
@@ -34,6 +32,17 @@ router.post('/create', (req, res, next) => {
       //   res.json(newTrip);
       // });
     })
+    .catch(next);
+});
+
+router.get('/mytrips', (req, res, next) => {
+  if (!req.session.currentUser) {
+    return res.status(401).json({error: 'unauthorized'});
+  }
+  console.log(req.session.currentUser);
+
+  Trip.find({_creator: req.session.currentUser._id})
+    .then((results) => res.json(results))
     .catch(next);
 });
 
