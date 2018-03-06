@@ -51,4 +51,10 @@ router.get('/trips', (req, res, next) => {
     .catch(next);
 });
 
+router.get('/trips/:id', (req, res, next) => {
+  Trip.findById(req.params.id)
+    .then((result) => res.json(result))
+    .catch(next);
+});
+
 module.exports = router;

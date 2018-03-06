@@ -52,10 +52,10 @@ app.use(session({
 //   next();
 // });
 
-app.use('/', index);
+app.use('/index', index);
 app.use('/auth', auth);
 app.use('/user', user);
-app.use('/trip', trip);
+app.use('/', trip);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
