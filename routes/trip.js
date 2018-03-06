@@ -21,7 +21,6 @@ router.post('/create', (req, res, next) => {
 
       const newTrip = new Trip({
         _creator: req.session.currentUser._id,
-        // _creator: req.body.user._id,
         tripTitle,
         description,
         image
@@ -56,5 +55,21 @@ router.get('/trips/:id', (req, res, next) => {
     .then((result) => res.json(result))
     .catch(next);
 });
+
+router.post('/desactivate', (req, res, next) => {
+  const id = req.body.id;
+  const updates = {
+    isAvailable: false
+  };
+
+  Trip.findByIdAndUpdate(id, updates)
+    .then((result) => res.json(result))
+    .catch(next);
+});
+
+// Product.findByIdAndUpdate(productId, updates, (err, product) => {
+//   if (err) { return next(err); }
+//   return res.redirect('/products');
+// });
 
 module.exports = router;
