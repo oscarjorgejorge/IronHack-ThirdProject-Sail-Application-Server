@@ -5,12 +5,12 @@ const router = express.Router();
 const Trip = require('../models/trip');
 
 router.post('/create', (req, res, next) => {
-  const tripTitle = req.body.triptitle;
+  const tripTitle = req.body.tripTitle;
   const description = req.body.description;
   const image = req.body.image;
 
   if (!tripTitle || !description) {
-    return res.status(422).json({error: 'validation'});
+    return res.status(424).json({error: 'validation'});
   }
 
   Trip.findOne({tripTitle}, 'tripTitle')
@@ -20,7 +20,8 @@ router.post('/create', (req, res, next) => {
       }
 
       const newTrip = new Trip({
-        _creator: req.body.user._id,
+        _creator: req.session.currentUser._id,
+        // _creator: req.body.user._id,
         tripTitle,
         description,
         image
