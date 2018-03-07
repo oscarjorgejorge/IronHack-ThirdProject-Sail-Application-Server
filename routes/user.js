@@ -33,6 +33,9 @@ router.post('/edit', (req, res, next) => {
 });
 
 router.post('/delete', (req, res, next) => {
+  if (!req.session.currentUser) {
+    return res.status(401).json({error: 'unauthorized'});
+  }
   const id = req.session.currentUser._id;
 
   Trip.remove({ _creator: id }, function (err) {

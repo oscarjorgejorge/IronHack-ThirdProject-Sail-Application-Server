@@ -75,6 +75,9 @@ router.post('/signup', (req, res, next) => {
 });
 
 router.post('/logout', (req, res) => {
+  if (!req.session.currentUser) {
+    return res.status(401).json({error: 'unauthorized'});
+  }
   req.session.currentUser = null;
   return res.status(204).send();
 });
