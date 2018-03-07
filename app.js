@@ -13,6 +13,7 @@ const cors = require('cors');
 const index = require('./routes/index');
 const auth = require('./routes/auth');
 const user = require('./routes/user');
+const trip = require('./routes/trip');
 
 const app = express();
 
@@ -46,14 +47,15 @@ app.use(session({
   }
 }));
 
-app.use((req, res, next) => {
-  app.locals.user = req.session.currentUser;
-  next();
-});
+// app.use((req, res, next) => {
+//   app.locals.user = req.session.currentUser;
+//   next();
+// });
 
-app.use('/', index);
+app.use('/index', index);
 app.use('/auth', auth);
 app.use('/user', user);
+app.use('/', trip);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
