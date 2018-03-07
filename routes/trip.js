@@ -28,6 +28,7 @@ router.post('/create', (req, res, next) => {
 
       newTrip.save()
         .then((trip) => {
+          console.log(trip);
           res.json(trip);
         });
     })
@@ -48,6 +49,22 @@ router.get('/trips', (req, res, next) => {
   Trip.find({})
     .then((results) => res.json(results))
     .catch(next);
+});
+
+router.post('/mytrips/edit/:id', (req, res, next) => {
+  const tridId = req.body._id;
+  const updates = {
+    tripTitle: req.body.tripTitle,
+    description: req.body.description,
+    image: req.body.image
+  };
+
+  Trip.findByIdAndUpdate(tridId, updates, {new: true}, (err, newInfo) => {
+    if (err) {
+      return next(err);
+    }
+    return res.json(newInfo);
+  });
 });
 
 router.get('/trips/:id', (req, res, next) => {

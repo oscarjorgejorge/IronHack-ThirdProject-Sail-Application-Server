@@ -14,10 +14,8 @@ router.post('/edit', (req, res, next) => {
 
   const updates = {
     email: req.body.email,
-    name: req.body.name,
     description: req.body.description
   };
-
   const id = req.session.currentUser._id;
 
   // --- data validation for edit form
