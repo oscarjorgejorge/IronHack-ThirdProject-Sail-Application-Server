@@ -11,8 +11,14 @@ router.get('/trips', (req, res, next) => {
 });
 
 router.get('/trips/:id', (req, res, next) => {
+  if (req.session.currentUser) {
+    var idUser = req.session.currentUser._id;
+  } else {
+    idUser = undefined;
+  }
+
   Trip.findById(req.params.id)
-    .then((result) => res.json(result))
+    .then((result) => res.json({result: result, idUser: idUser}))
     .catch(next);
 });
 
